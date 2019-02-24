@@ -26,6 +26,11 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+@app.route('/files')
+def files():
+    """Render the website's image page."""
+    return render_template('files.html')
+
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():

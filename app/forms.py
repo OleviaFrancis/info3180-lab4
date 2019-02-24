@@ -4,3 +4,4 @@ from app import app
 
 class UploadForm(FlaskForm):
     pictures = FileField('pictures', validators = [FileRequired(), FileAllowed(['jpg', 'png', 'Images only!'])])
+
