@@ -26,12 +26,19 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
 
+def get_uploaded_images():
+    os.chdir('/app')
+    rootdir = os.getcwd()
+    for subdir, dirs, files in os.walk(rootdir + '/static/uploads'):
+         for file in files:
+             return os.path.join(subdir, file)
+
 @app.route('/files')
 def files():
-        if not session.get('logged_in'):
+    if not session.get('logged_in'):
         abort(401)
-    """Render the website's image page."""
-    return render_template('files.html')
+    images=get_uploaded_images()
+    return render_template('files.html', image=image)
 
 
 @app.route('/upload', methods=['POST', 'GET'])
@@ -74,6 +81,7 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out', 'success')
     return redirect(url_for('home'))
+
 
 
 ###
