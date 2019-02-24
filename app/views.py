@@ -28,6 +28,8 @@ def about():
 
 @app.route('/files')
 def files():
+        if not session.get('logged_in'):
+        abort(401)
     """Render the website's image page."""
     return render_template('files.html')
 
