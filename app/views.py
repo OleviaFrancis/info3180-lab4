@@ -27,19 +27,16 @@ def about():
     return render_template('about.html', name="Mary Jane")
 
 def get_uploaded_images():
-    os.chdir('/app')
     rootdir = os.getcwd()
-    for subdir, dirs, files in os.walk(rootdir + '/static/uploads'):
-         for file in files:
-             return os.path.join(subdir, file)
+    print (rootdir)
+    for subdir, dirs, files in os.walk(rootdir + 'app/static/uploads'):
+        for file in files:
+            print ( os.path.join(subdir, file))
 
 @app.route('/files')
 def files():
-    if not session.get('logged_in'):
-        abort(401)
     images=get_uploaded_images()
-    return render_template('files.html', image=image)
-
+    return render_template('files.html', images = images)
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
