@@ -27,11 +27,13 @@ def about():
     return render_template('about.html', name="Mary Jane")
 
 def get_uploaded_images():
+    contain = []
     rootdir = os.getcwd()
     print (rootdir)
-    for subdir, dirs, files in os.walk(rootdir + 'app/static/uploads'):
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
         for file in files:
-            print ( os.path.join(subdir, file))
+            contain.append (file)
+    return contain
 
 @app.route('/files')
 def files():
